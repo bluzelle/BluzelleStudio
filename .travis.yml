@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+  - "node" # Use latest NodeJS
+
+
+install:
+  - cd web
+  - npm install
+  - cd ..
+
+script:
+  - cd web
+  - npm run dev-compile
+  - cd ..
+
+deploy:
+  - cd desktop
+  - npm install
+  - npm run package-mac
