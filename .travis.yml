@@ -31,6 +31,6 @@ after_success:
 - npm install
 - npm run package-mac
 - cd dist
-- tar czf ${PACKAGE_NAME_OSX}.tar.gz Bluzelle-darwin-x64
+- tar czf ${PACKAGE_NAME_OSX} Bluzelle-darwin-x64
 - echo ${TRAVIS_BRANCH}
 - travis_retry curl -u${REPO_USER}:${REPO_PASSWORD} -T ${PACKAGE_NAME_OSX} "https://bluzelle.jfrog.io/bluzelle/OSX/${PACKAGE_NAME_OSX}"
