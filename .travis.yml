@@ -24,7 +24,3 @@ script:
   - cd web
   - npm run dev-compile
   - cd ..
-
-after_success:
-  
-
