@@ -2,10 +2,12 @@
   "name": "Bluzelle",
   "productName": "Bluzelle",
   "version": "1.0.0",
+  "description": "Bluzelle CRUD App",
   "main": "main.js",
   "dependencies": {
     "command-line-args": "^5.0.2",
     "electron": "^2.0.2",
+    "electron-installer-debian": "^0.8.1",
     "electron-packager": "^12.1.0",
     "electron-react-devtools": "^0.5.3"
   },
@@ -15,7 +17,8 @@
     "start-debug": "electron ./main.js --debug",
     "package-mac": "electron-packager . --out=dist --platform=darwin --arch=x64 --icon=bluzelle.icns --overwrite --package-manager=yarn --asar",
     "package-linux": "electron-packager . --out=dist --platform=linux --arch=x64 --overwrite --package-manager=yarn",
-    "package-windows": "electron-packager . --out=dist --platform=win32 --arch=x64 --overwrite --package-manager=yarn"
+    "package-windows": "electron-packager . --out=dist --platform=win32 --arch=x64 --overwrite --package-manager=yarn",
+    "package-deb": "electron-installer-debian --src dist/Bluzelle-linux-x64/ --dest dist --arch amd64"
   },
   "license": "UNLICENSED",
   "private": true
