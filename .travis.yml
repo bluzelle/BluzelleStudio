@@ -18,3 +18,5 @@ deploy:
   - cd desktop
   - npm install
   - npm run package-mac
+
+  
