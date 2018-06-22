@@ -14,9 +14,8 @@ script:
   - npm run dev-compile
   - cd ..
 
-deploy:
+after_success:
   - cd desktop
   - npm install
   - npm run package-mac
 
-  
