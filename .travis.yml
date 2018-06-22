@@ -3,6 +3,17 @@ language: node_js
 node_js:
   - "node" # Use latest NodeJS
 
+matrix:
+  include:
+    - after_success:
+      - cd desktop
+      - npm install
+      - npm run package-mac
+    - after_success:
+      - cd desktop
+      - npm install
+      - npm run package-linux
+
 
 install:
   - cd web
@@ -15,7 +26,5 @@ script:
   - cd ..
 
 after_success:
-  - cd desktop
-  - npm install
-  - npm run package-mac
+  
 
