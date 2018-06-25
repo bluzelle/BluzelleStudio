@@ -15,7 +15,7 @@
     "emulator": "./emulator/Emulator.js",
     "start": "electron ./main.js",
     "start-debug": "electron ./main.js --debug",
-    "package-mac": "electron-packager . --out=dist --platform=darwin --arch=x64 --icon=bluzelle.icns --overwrite --package-manager=yarn --asar",
+    "package-mac": "electron-packager . --out=dist --platform=darwin --arch=x64 --icon=logo.icns --overwrite --package-manager=yarn --asar",
     "package-linux": "electron-packager . --out=dist --platform=linux --arch=x64 --overwrite --package-manager=yarn",
     "package-windows": "electron-packager . --out=dist --platform=win32 --arch=x64 --overwrite --package-manager=yarn",
     "package-deb": "electron-installer-debian --src dist/BluzelleCRUD-linux-x64/ --dest dist --arch amd64 --config deb_config.json"
