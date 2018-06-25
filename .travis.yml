@@ -36,7 +36,7 @@ after_success:
 # Mac packaging
 
 - npm run package-mac
-- cd dist/Bluzelle-darwin-x64
+- cd dist/BluzelleCRUD-darwin-x64
 - tar czf ${PACKAGE_NAME_OSX} *
 - echo ${TRAVIS_BRANCH}
 - travis_retry curl -u${REPO_USER}:${REPO_PASSWORD} -T ${PACKAGE_NAME_OSX} "https://bluzelle.jfrog.io/bluzelle/OSX/${PACKAGE_NAME_OSX}"
