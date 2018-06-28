@@ -7,8 +7,8 @@ node_js:
 
 env:
   global:
-    - PROJECT_VERSION_MAJOR="0"
-    - PROJECT_VERSION_MINOR="1"
+    - PROJECT_VERSION_MAJOR="1"
+    - PROJECT_VERSION_MINOR="0"
     - PROJECT_VERSION_PATCH="${TRAVIS_BUILD_NUMBER}"
     - PROJECT_VERSION="${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
     - PACKAGE_ARCHITECTURE="amd64"
@@ -36,7 +36,7 @@ after_success:
 # Mac packaging
 
 - npm run package-mac
-- cd dist/BluzelleCRUD-darwin-x64
+- cd dist/bluzelle-crud-darwin-x64
 - tar czf ${PACKAGE_NAME_OSX} *
 - echo ${TRAVIS_BRANCH}
 - travis_retry curl -u${REPO_USER}:${REPO_PASSWORD} -T ${PACKAGE_NAME_OSX} "https://bluzelle.jfrog.io/bluzelle/OSX/${PACKAGE_NAME_OSX}"
@@ -47,6 +47,6 @@ after_success:
 
 - npm run package-linux
 - brew install fakeroot dpkg
-- npm run package-deb
+- npm run package-deb --options.version ${PROJECT_VERSION}
 - travis_retry curl -u${REPO_USER}:${REPO_PASSWORD} -XPUT "https://bluzelle.jfrog.io/bluzelle/debian-local/pool/${PACKAGE_NAME_DEB};deb.distribution=all;deb.component=stable;deb.architecture=${PACKAGE_ARCHITECTURE}" -T dist/*.deb
 
