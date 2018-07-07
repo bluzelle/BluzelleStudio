@@ -30,5 +30,5 @@ script:
 
 after_success:
 - if [ "$TRAVIS_BRANCH" = "master" ]; then
-    ./package.sh
+    ./package.sh;
   fi
