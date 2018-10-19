@@ -1,5 +1,6 @@
 import {Editor} from "./Editor";
 import {KeyList} from "./KeyList";
+import {Log} from "./Log";
 import {Header} from "./Header/Header";
 import 'bootstrap/dist/css/bootstrap.css';
 import {CommandControls} from "./CommandControls";
@@ -20,8 +21,9 @@ export class Main extends Component {
 
                             <CommandControls/>
                             <hr/>
-
                             <KeyList/>
+                            <hr style={{marginBottom: 0}}/>
+                            <Log/>
 
                         </ReflexElement>
                         <ReflexSplitter/>

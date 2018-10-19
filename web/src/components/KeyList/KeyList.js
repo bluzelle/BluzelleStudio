@@ -88,12 +88,6 @@ export class KeyList extends Component {
                     </BS.ButtonGroup>
                 </BS.ButtonToolbar>
             </div>
-
-            <hr/>
-
-            <div style={{padding: 10}}>
-                
-            </div>
             </Fragment>
         );
     }

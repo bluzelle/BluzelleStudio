@@ -39,9 +39,11 @@ export class App extends Component {
                 connected: true
             });
 
-        }).catch(() => {
+        }).catch(e => {
 
             alert('Could not connect to provided websocket.');
+
+            throw e;
 
         });
 
