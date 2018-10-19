@@ -1,6 +1,6 @@
 import {JSONIcon, TextIcon, FileIcon} from "../../ObjIcon";
 import {selectedKey, refreshKeys, keys, tempKey} from "../KeyList";
-import {create, remove} from 'bluzelle';
+import {getClient} from '../../../services/BluzelleService';
 import {execute} from '../../../services/CommandQueueService';
 
 
@@ -30,7 +30,7 @@ export class TypeModal extends Component {
                 keys.push(this.props.keyField);
                 tempKey.set(this.props.keyField);
 
-                create(this.props.keyField, keyData).then(() => {
+                getClient().create(this.props.keyField, keyData).then(() => {
                     
                     tempKey.set();
                     refreshKeys().then(resolve)
@@ -41,7 +41,7 @@ export class TypeModal extends Component {
 
             undoIt: () => new Promise(resolve => {
 
-                remove(this.props.keyField).then(() =>
+                getClient().remove(this.props.keyField).then(() =>
                     refreshKeys().then(resolve));
             }),
 

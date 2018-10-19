@@ -1,5 +1,5 @@
 import {selectedKey, refreshKeys, tempKey} from '../components/KeyList';
-import {read, update, remove as removeKey} from 'bluzelle';
+import {getClient} from './BluzelleService'
 import {observe} from 'mobx';
 
 export const activeValue = observable(undefined);
@@ -18,7 +18,7 @@ observe(selectedKey, ({newValue, oldValue}) => {
 		// We can say that if the value is an object, 
 		// wrap in an OMR. See: JSONEditor.js.
 
-		read(newValue).then(value =>
+		getClient().read(newValue).then(value =>
 			activeValue.set(value));
 
 	}
@@ -27,7 +27,7 @@ observe(selectedKey, ({newValue, oldValue}) => {
 
 
 export const save = () => 
-    update(selectedKey.get(), activeValue.get());
+    getClient().update(selectedKey.get(), activeValue.get());
 
 
 export const remove = () => new Promise(resolve => {
@@ -46,11 +46,11 @@ export const remove = () => new Promise(resolve => {
 
 export const rename = (oldKey, newKey) => new Promise(resolve => {
 
-    read(oldKey).then(v => {
+    getClient().read(oldKey).then(v => {
 
-        removeKey(oldKey).then(() => {
+        getClient().remove(oldKey).then(() => {
 
-            update(newKey, v).then(() => {
+            getClient().update(newKey, v).then(() => {
 
             	const s = selectedKey;
 

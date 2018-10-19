@@ -3,7 +3,7 @@ import {NewKeyField} from "./NewKey/NewKeyField";
 import {activeValue, save, remove, reload} from '../../services/CRUDService';
 import {execute, removePreviousHistory, updateHistoryMessage} from '../../services/CommandQueueService';
 import {observe} from 'mobx';
-import {create, update, keys as bzkeys} from 'bluzelle';
+import {getClient} from '../../services/BluzelleService'
 import {Fragment} from 'react';
 
 export const selectedKey = observable(undefined);
@@ -12,7 +12,7 @@ export const keys = observable([]);
 
 
 export const refreshKeys = () => 
-    bzkeys().then(k => keys.replace(k));
+    getClient().keys().then(k => keys.replace(k));
 
 export const tempKey = observable.box();
 
@@ -112,7 +112,7 @@ const executeRemove = () => {
 
         undoIt: () => new Promise(resolve =>
 
-            create(sk, val).then(() => reload().then(() => {
+            getClient().create(sk, val).then(() => reload().then(() => {
 
                 selectedKey.set(sk);
                 resolve();
