@@ -35,14 +35,15 @@ export class TypeModal extends Component {
                     tempKey.set();
                     refreshKeys().then(resolve)
 
-                });
+                }).catch(() => alert('Failed to create key due to bluzelle network error.'));
 
             }),
 
             undoIt: () => new Promise(resolve => {
 
                 getClient().remove(this.props.keyField).then(() =>
-                    refreshKeys().then(resolve));
+                    refreshKeys().then(resolve))
+                    .catch(() => alert('Failed to undo due to bluzelle network error.'));
             }),
 
             message: <span>Added field <code key={1}>{this.props.keyField}</code>.</span>

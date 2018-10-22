@@ -12,7 +12,7 @@ export const keys = observable([]);
 
 
 export const refreshKeys = () => 
-    getClient().keys().then(k => keys.replace(k));
+    getClient().keys().then(k => keys.replace(k)).catch(() => alert('Failed to fetch keys due to bluzelle network error.'));
 
 export const tempKey = observable.box();
 
@@ -104,14 +104,16 @@ const executeRemove = () => {
 
         doIt: () => remove(),
 
-        undoIt: () => new Promise(resolve =>
+        undoIt: () => new Promise(resolve => {
 
-            getClient().create(sk, val).then(() => reload().then(() => {
+            return getClient().create(sk, val).then(() => reload().then(() => {
 
                 selectedKey.set(sk);
                 resolve();
 
-            }))),
+            })).catch(() => alert('Undo failed due to bluzelle network error.'));
+
+        }),
 
         message: <span>Removed key <code key={1}>{sk}</code>.</span>
 

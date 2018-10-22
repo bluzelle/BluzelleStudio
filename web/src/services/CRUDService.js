@@ -19,7 +19,8 @@ observe(selectedKey, ({newValue, oldValue}) => {
 		// wrap in an OMR. See: JSONEditor.js.
 
 		getClient().read(newValue).then(value =>
-			activeValue.set(value));
+			activeValue.set(value))
+        .catch(() => alert('Failed to read value due to bluzelle network error.'));
 
 	}
 
@@ -27,7 +28,8 @@ observe(selectedKey, ({newValue, oldValue}) => {
 
 
 export const save = () => 
-    getClient().update(selectedKey.get(), activeValue.get());
+    getClient().update(selectedKey.get(), activeValue.get())
+    .catch(() => alert('Failed to save due to bluzelle network error.'));
 
 
 export const remove = () => new Promise(resolve => {
@@ -39,7 +41,8 @@ export const remove = () => new Promise(resolve => {
 
     return removeKey(sk).then(() => {
         reload().then(resolve);
-    });
+    })
+    .catch(() => alert('Failed to remove due to bluzelle network error.'));
 
 });
 
@@ -62,11 +65,11 @@ export const rename = (oldKey, newKey) => new Promise(resolve => {
 
                 reload().then(resolve);
 
-            });
+            }).catch(() => alert('Bluzelle network error.'));
 
-        });
+        }).catch(() => alert('Bluzelle network error.'));
 
-    }); 
+    }).catch(() => alert('Bluzelle network error.'));
 
 });
     

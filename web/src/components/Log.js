@@ -6,7 +6,16 @@ log.observe(v => {
         logs.shift();
     }
 
-    logs.push(v.newValue);
+
+    const date = new Date();
+
+    const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds();
+
+    logs.push({
+        send_or_receive: v.newValue[0],
+        json: v.newValue[1],
+        time
+    });
 
 });
 
@@ -21,30 +30,43 @@ export class Log extends Component {
     render() {
 
         return (
-            <div style={{
-                padding: 10,
-                fontFamily: "monospace",
-                background: "#EEE",
-                wordBreak: "break-all",
-            }}>
+            <BS.ListGroup flush>
 
                 {logs.reverse().map((msg, i) =>
 
-                    <div key={i} style={{
-                        margin: 10,
-                        padding: 10,
-                        borderLeft: "1px solid black"
+                    <BS.ListGroupItem 
+                    color={msg.json.error !== undefined ? 'danger' : ''}
+                    key={i}
+                    style={{
+                        wordBreak: 'break-all'
                     }}>
 
-                        {msg.map((point, i) => 
-
-                            <div key={i}>{JSON.stringify(point)}</div>
+                        <BS.ListGroupItemHeading>
+                            <span>
+                                <i 
+                                style={{
+                                    color: msg.send_or_receive === 'Sending' ? 'orange' : 'purple'
+                                }}
+                                className={
+                                    msg.send_or_receive === 'Sending' ? "fas fa-sign-out-alt" : "fas fa-sign-in-alt fa-flip-horizontal"
+                                }></i>
+                            </span>
+                            &nbsp; &nbsp;&nbsp;&nbsp;
+                            <BS.Badge pill>{msg.time}</BS.Badge>
+                        </BS.ListGroupItemHeading>
                         
-                        )}
-                    </div>
+
+                        <BS.ListGroupItemText style={{
+                            fontFamily: 'monospace'
+                        }}>
+                            {JSON.stringify(msg.json)}
+                        </BS.ListGroupItemText>
+                        
+
+                    </BS.ListGroupItem>
 
                 )}
-            </div>
+            </BS.ListGroup>
         );
     }
 }
