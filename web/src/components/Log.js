@@ -7,6 +7,20 @@ log.observe(v => {
     }
 
 
+    if(v.newValue[1].read && v.newValue[1].read.value) {
+        v.newValue[1].read.value = ['...'];
+    }
+
+    if(v.newValue[1].subscriptionUpdate) {
+        v.newValue[1].subscriptionUpdate.value = ['...'];
+    }
+
+    if(v.newValue[1].update && v.newValue[1].update.value) {
+        v.newValue[1].update.value = ['...'];
+    }
+
+
+
     const date = new Date();
 
     const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds();

@@ -5,9 +5,6 @@ import {observe} from 'mobx';
 export const activeValue = observable(undefined);
 
 
-// Worry about undoing later
-// But this is where we'd do it.
-
 observe(selectedKey, ({newValue, oldValue}) => {
 
 	activeValue.set(undefined);
@@ -17,7 +14,7 @@ observe(selectedKey, ({newValue, oldValue}) => {
 
 		// We can say that if the value is an object, 
 		// wrap in an OMR. See: JSONEditor.js.
-
+        
 		getClient().read(newValue).then(value =>
 			activeValue.set(value))
         .catch(() => alert('Failed to read value due to bluzelle network error.'));

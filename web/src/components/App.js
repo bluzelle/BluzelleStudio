@@ -8,8 +8,12 @@ import DaemonSelector from './DaemonSelector'
 import DevTools from 'mobx-react-devtools';
 
 // Debugging
-// import {configureDevtool} from 'mobx-react-devtools';
-// configureDevtool({logEnabled: true});
+import {configureDevtool} from 'mobx-react-devtools';
+
+const url_params = window && new URLSearchParams(window.location.search);
+
+configureDevtool({logEnabled: url_params.has('log')});
+
 
 import {createClient} from '../services/BluzelleService'
 
