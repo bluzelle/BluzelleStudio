@@ -17,17 +17,17 @@ export class Main extends Component {
                 </div>
                 <ReflexElement flex={1}>
                     <ReflexContainer orientation='vertical'>
-                        <ReflexElement flex={0.4}>
+                        <ReflexElement flex={0.5}>
 
                             <CommandControls/>
                             <hr/>
                             <KeyList/>
-                            <hr style={{marginBottom: 0}}/>
+                            <br/>
                             <Log/>
 
                         </ReflexElement>
                         <ReflexSplitter/>
-                        <ReflexElement>
+                        <ReflexElement flex={0.5}>
 
                             <Editor/>
 

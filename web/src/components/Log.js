@@ -26,7 +26,7 @@ log.observe(v => {
     const time = date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds() + '.' + date.getMilliseconds();
 
     logs.push({
-        send_or_receive: v.newValue[0],
+        type: v.newValue[0],
         json: v.newValue[1],
         time
     });
@@ -34,7 +34,7 @@ log.observe(v => {
 });
 
 
-const logs_max_length = 5;
+const logs_max_length = 10;
 const logs = observable([]);
 
 
@@ -49,7 +49,9 @@ export class Log extends Component {
                 {logs.reverse().map((msg, i) =>
 
                     <BS.ListGroupItem 
-                    color={msg.json.error !== undefined ? 'danger' : ''}
+                    color={
+                        (msg.json.error !== undefined || msg.type === 'Connection error') 
+                           ? 'danger' : ''}
                     key={i}
                     style={{
                         wordBreak: 'break-all'
@@ -59,10 +61,22 @@ export class Log extends Component {
                             <span>
                                 <i 
                                 style={{
-                                    color: msg.send_or_receive === 'Sending' ? 'orange' : 'purple'
+                                    color: ({
+                                        'Sending': 'orange',
+                                        'Receiving': 'purple',
+                                        'Connection open': 'green',
+                                        'Connection error': 'red',
+                                        'Redirecting': 'hotpink'
+                                    })[msg.type]
                                 }}
                                 className={
-                                    msg.send_or_receive === 'Sending' ? "fas fa-sign-out-alt" : "fas fa-sign-in-alt fa-flip-horizontal"
+                                    ({
+                                        'Sending': "fas fa-sign-out-alt",
+                                        'Receiving': 'fas fa-sign-in-alt fa-flip-horizontal',
+                                        'Connection open': "fas fa-plug",
+                                        'Connection error': 'fas fa-exclamation-triangle',
+                                        'Redirecting': 'fas fa-directions'
+                                    })[msg.type]
                                 }></i>
                             </span>
                             &nbsp; &nbsp;&nbsp;&nbsp;
@@ -71,7 +85,9 @@ export class Log extends Component {
                         
 
                         <BS.ListGroupItemText style={{
-                            fontFamily: 'monospace'
+                            fontFamily: 'monospace',
+                            color: '#888888',
+                            fontStyle: 'italic'
                         }}>
                             {JSON.stringify(msg.json)}
                         </BS.ListGroupItemText>
