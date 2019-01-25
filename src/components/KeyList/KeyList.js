@@ -17,7 +17,7 @@ export const keys = observable([]);
 export const refreshKeys = () => 
     getClient().keys().then(k => keys.replace(k)).catch(() => alert('Failed to fetch keys due to bluzelle network error.'));
 
-export const tempKey = observable.box();
+export const tempKeys = observable([]);
 
 
 @observer

@@ -1,5 +1,6 @@
 import {getClient} from '../../services/BluzelleService'
 import Papa from 'papaparse';
+import {create} from '../../services/CRUDService';
 
 
 export const importCSV = () => {
@@ -42,7 +43,8 @@ export const importCSV = () => {
                 }));
 
 
-                console.log(fields);
+                createFields(fields);
+
 
             }
         });
@@ -52,5 +54,24 @@ export const importCSV = () => {
 
 
     input.click();
+
+};
+
+
+const createFields = async fields => {
+
+    // We want a modal thing
+
+    const keys = await getClient().keys();
+
+    // And then remove it
+
+    const promises = fields.map(({key, value}) => {
+        if(!keys.includes(key)) {
+            create(key, value);
+        } else {
+            getClient().update(key, value);
+        }
+    });
 
 };
