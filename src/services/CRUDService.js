@@ -69,8 +69,6 @@ export const create = (key, value) => {
             tempKeys.splice(tempKeys.indexOf(key), 1);
         }
 
-        refreshKeys();
-
     }).catch(e => {
 
         while(tempKeys.includes(key)) {
