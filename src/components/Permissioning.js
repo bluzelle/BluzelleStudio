@@ -205,6 +205,8 @@ export class Permissioning extends Component {
                 <BS.Modal isOpen={this.state.modal} toggle={() => this.toggle()}>
                   <BS.ModalHeader toggle={() => this.toggle()}>Delete Writers</BS.ModalHeader>
                   <BS.ModalBody>
+                    <BS.Alert color="secondary">Please click on the writer you want to remove.</BS.Alert>
+
                     <BS.ListGroup>
                     {
                         writers.get().writers.map(w => 
@@ -216,9 +218,15 @@ export class Permissioning extends Component {
                                 onClick={() => this.deleteWriter(w)}>
 
                                 {w}
+
+                                
                             </BS.ListGroupItem>)
                     }
                     </BS.ListGroup>
+
+                    {
+                        writers.get().writers.length === 0 && <div>No writers.</div>
+                    }
                   </BS.ModalBody>
                 </BS.Modal>
             </Fragment>

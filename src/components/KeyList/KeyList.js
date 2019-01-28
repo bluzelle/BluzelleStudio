@@ -12,7 +12,7 @@ import {loadingBar} from '../loadingBar';
 export const selectedKey = observable(undefined);
 
 
-const isLoading = observable(false);
+export const isLoading = observable(false);
 
 export const keys = observable([]);
 
