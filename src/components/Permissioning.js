@@ -1,10 +1,13 @@
 import {autorun} from 'mobx';
 import {getClient, hasClient} from '../services/BluzelleService';
 import {Fragment} from 'react';
+import {loadingBar} from './loadingBar';
 
 export const writers = observable();
 
 export const is_writer = observable('read-only');
+
+export const loading = observable(false);
 
 
 autorun(() => {
@@ -46,9 +49,15 @@ export class Permissioning extends Component {
 
     refresh() {
 
+        loading.set(true);
+
         getClient().getWriters().then(
-            w => writers.set(w),
+            w => {
+                loading.set(false);
+                writers.set(w)
+            },
             e => {
+                loading.set(false);
                 alert('Failed to get writers.');
                 throw e;
             }
@@ -109,27 +118,27 @@ export class Permissioning extends Component {
         return (
             <Fragment>
 
-                {
+                { loading.get() ? <div style={{marginBottom: 15}}>{loadingBar}</div> :
 
-                is_writer.get() === 'owner' ?
+                    is_writer.get() === 'owner' ?
 
-                    <BS.Alert color="success">
-                        You are the database owner.
-                    </BS.Alert>
-
-                    :
-
-                    is_writer.get() === 'writer' ?
-
-                        <BS.Alert color="primary">
-                            You can write to this database.
+                        <BS.Alert color="success">
+                            You are the database owner.
                         </BS.Alert>
 
                         :
 
-                        <BS.Alert color="dark">
-                            You cannot write to this database.
-                        </BS.Alert>
+                        is_writer.get() === 'writer' ?
+
+                            <BS.Alert color="primary">
+                                You can write to this database.
+                            </BS.Alert>
+
+                            :
+
+                            <BS.Alert color="dark">
+                                You cannot write to this database.
+                            </BS.Alert>
                 }
 
                 <BS.Table>
@@ -219,7 +228,7 @@ export class Permissioning extends Component {
 
                                 {w}
 
-                                
+
                             </BS.ListGroupItem>)
                     }
                     </BS.ListGroup>
