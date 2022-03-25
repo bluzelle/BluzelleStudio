@@ -10,7 +10,7 @@
     "electron-react-devtools": "^0.5.3"
   },
   "devDependencies": {
-    "electron": "10.1.4"
+    "electron": "13.6.6"
   },
   "scripts": {
     "emulator": "./emulator/Emulator.js",
