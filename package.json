@@ -43,7 +43,7 @@
     "jiiis-jlayout": "^1.0.0",
     "jquery": "^3.5.1",
     "js-joda": "^1.10.1",
-    "jsdom": "^16.4.0",
+    "jsdom": "^16.5.0",
     "jsdom-global": "^3.0.2",
     "koa": "^2.13.0",
     "local-web-server": "^4.2.1",
